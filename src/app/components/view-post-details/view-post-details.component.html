@@ -1,0 +1,64 @@
+<div>
+    <div class="spinner__loading" *ngIf="isLoading">
+        <div>
+            <mat-spinner></mat-spinner>
+        </div>
+      </div>
+    <div class="flex gap-2 ml-2 p-3 bg" *ngIf="!isLoading">
+        <mat-card class="col-7 border-1 mb-2">
+            <img class="cursor" src="../../../assets/left_arrow.svg" alt="" (click)="showPrevious()"
+                [ngClass]="{'disable' : imageIndex <=0}">
+            <img class="postImg" [src]="imagesList[imageIndex].imageURL" alt="">
+            <img class="right_arrow cursor" src="../../../assets/right_arrow.svg" alt="" (click)="showNext()"
+                [ngClass]="{'disable' : imageIndex >=imagesList.length-1}">
+        </mat-card>
+        <div class="col-5 h200">
+            <mat-card class="border-1">
+                <mat-card-title>{{ postDetails?.price | currency:'INR' }}</mat-card-title>
+                <mat-card-content class="description">
+                    <p style="margin: 0;">{{ postDetails?.title }}</p>
+                    <p>{{ postDetails?.year || '' }} - {{ postDetails?.kmDriven ? postDetails.kmDriven + ' kms' : '' }}
+                    </p>
+                    <div class="loc-date">
+                        <p class="loc">{{ postDetails?.nearBy }},{{ postDetails?.city }} , {{postDetails?.state}}</p>
+                        <p class="date">{{formatDate(postDetails?.createdOn)}}</p>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+            <mat-card class="mt-10 border-1">
+                <mat-card-title>Ankit sharma</mat-card-title>
+                <mat-card-content>
+                    <button class="post" mat-raised-button color="primary">Chat with seller</button>
+                    <br/>
+                    <br/>
+                    <p>888888888</p>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <mat-card class="col-7 border-1 mb-2" *ngIf="mainCategoryName == 'Vehicles'">
+            <mat-card-title>Overview</mat-card-title>
+            <mat-card-content class="flex">
+            <div class="col-4 flex">
+              <p><b>Transmission Type</b></p>
+              <p class="mt-70">{{ transmissionType[0].label}}</p>
+            </div>
+            <div class="col-4 flex mt-50">
+                <p><b>Fuel type</b></p>
+                <p class="mt-70">{{ fuelType[0].label}}</p>
+            </div>
+            <div class="col-4 flex mt-50">
+                <p><b>No of owners</b></p>
+                <p class="mt-70">{{ postDetails?.noOfOwner}}</p>
+            </div>
+            </mat-card-content>
+        </mat-card>
+        <mat-card class="col-7 border-1 mb-2">
+            <mat-card-title>Description</mat-card-title>
+            <mat-card-content>
+              <p>{{ postDetails?.discription}}</p>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <div>
+    </div>
+</div>

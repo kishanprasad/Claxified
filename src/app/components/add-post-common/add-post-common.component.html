@@ -1,0 +1,152 @@
+<div class="container-fluid">
+    <div class="header">Post your add</div>
+    <div class="container">
+        <div class="heading">
+            <h4>SELECTED CATEGORY</h4>
+            <div class="selected-cat">
+                <p>Gadgents/Mobile phones</p>
+                <a routerLink="/post">Change</a>
+            </div>
+            <nav class="navbar-bottom"></nav>
+        </div>
+        <h4>INCLUDE SOME DETAILS</h4>
+        <div class="include-details">
+            <mat-form-field *ngIf="subCategoriesWithBrand.includes(subCategory)">
+                <mat-label>Brand</mat-label>
+                <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="myControl"
+                    [matAutocomplete]="auto">
+                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="handleBrand($event.option.value)" [displayWith]="displayBrand">
+                    <mat-option *ngFor="let brand of filteredBrands | async" [value]="brand">
+                        {{ brand.brandName }}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+            <mat-form-field *ngIf="subCategoriesWithYear.includes(subCategory)">
+                <mat-label>Year</mat-label>
+                <input matInput placeholder="Enter your text" [(ngModel)]="commonPayload.year"
+                    (input)="allowOnlyNumbers($event)">
+            </mat-form-field>
+            <mat-form-field *ngIf="subCategoriesWithKms.includes(subCategory)">
+                <mat-label>KM driven</mat-label>
+                <input matInput placeholder="Enter your text" [(ngModel)]="commonPayload.kmDriven"
+                    (input)="allowOnlyNumbers($event)">
+            </mat-form-field>
+            <div *ngIf="subCategoriesWithFuel.includes(subCategory)">
+                <mat-label>Fuel Type</mat-label>
+                <div class="fueltype">
+                    <mat-chip-list>
+                        <mat-chip *ngFor="let fuel of fuelTypes" (click)="selectButton(fuel)"
+                         [selected]="selectedFuel === fuel.label">{{fuel.label}}</mat-chip>
+                    </mat-chip-list>
+                </div>
+            </div>
+            <div *ngIf="subCategoriesWithTransmission.includes(subCategory)">
+                <mat-label>Transmission</mat-label>
+                <div class="fueltype">
+                    <mat-chip-list>
+                        <mat-chip *ngFor="let transmission of transmissionTypes" (click)="selectTransmission(transmission)"
+                        [selected]="selectedTransmission == transmission.label">{{transmission.label}}</mat-chip>
+                   </mat-chip-list>
+                </div>
+            </div>
+            <div *ngIf="subCategoriesWithOwners.includes(subCategory)">
+                <mat-label>No of owners</mat-label>
+                <div class="fueltype">
+                    <mat-chip-list>
+                        <mat-chip *ngFor="let owner of numberOfOwners" (click)="selectOwnerNumber(owner)"
+                            [selected]="selectedOwnerNumber == owner">{{owner}}</mat-chip>
+                    </mat-chip-list>
+                </div>
+            </div>
+            <mat-form-field>
+                <mat-label>Title</mat-label>
+                <input matInput placeholder="Enter your text" [(ngModel)]="commonPayload.title">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Description</mat-label>
+                <textarea matInput placeholder="Textarea" name="textareaInput"
+                    [(ngModel)]="commonPayload.discription"></textarea>
+            </mat-form-field>
+        </div>
+
+        <div class="price-section">
+            <h4>SET A PRICE</h4>
+            <div class="include-details">
+                <mat-form-field>
+                    <mat-label>Price</mat-label>
+                    <input matInput placeholder="Enter price" (input)="allowOnlyNumbers($event)"
+                        [(ngModel)]="commonPayload.price">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="uplod-sectin h-500">
+            <h4>UPLOAD UP TO 12 PHOTOS</h4>
+            <div class="cards">
+                <ul class="upld">
+                    <li class="upload-card" *ngFor="let item of cardsCount;let i=index">
+                        <div class="upload-card-brd" (click)="selectFile()" id="{{i}}" *ngIf="item ==''">
+                            <input type="file" id="fileUpload" name="fileUpload" (change)="selectImage($event)"
+                                style="display: none;" multiple>
+                            <div>
+                                <button class="camera"><img src="../../../assets/camera.svg" alt="camera"></button>
+                                <span class="add">Add photo</span>
+                            </div>
+                        </div>
+                        <div class="upload-card-brd" *ngIf="item !=''">
+                            <div class="preview">
+                                <button class="delete-button" (click)="deleteBackgroundImage(i)">
+                                    <span class="delete-icon">&#10006;</span>
+                                </button>
+                                <img [src]="item" height="100px" width="100px" alt="">
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="progs" *ngIf="progress">
+            <h5>Upload Progress</h5>
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+            </div>
+        </div>
+        <div class="include-details">
+            <h4 class="loc">CONFIRM YOUR LOCATION</h4>
+            <mat-form-field>
+                <mat-label>Pincode</mat-label>
+                <input matInput placeholder="Enter your pincode"
+                    (input)="getAddress($event.target.value);allowOnlyNumbers($event)"
+                    [(ngModel)]="commonPayload.pincode" maxlength="6">
+            </mat-form-field>
+            <mat-form-field *ngIf="commonPayload.state != null">
+                <mat-label>State</mat-label>
+                <input matInput placeholder="State" [(ngModel)]="commonPayload.state" readonly>
+            </mat-form-field>
+            <mat-form-field *ngIf="commonPayload.state != null">
+                <mat-label>City</mat-label>
+                <input matInput placeholder="City" [(ngModel)]="commonPayload.city" readonly>
+            </mat-form-field>
+            <mat-form-field *ngIf="commonPayload.state != null">
+                <mat-label>Near By</mat-label>
+                <input matInput placeholder="Nearby" [(ngModel)]="commonPayload.nearBy" readonly>
+            </mat-form-field>
+        </div>
+        <div class="details">
+            <h4>REVIEW YOUR DETAILS</h4>
+            <div class="detail">
+                <input type="file" name="" id="" style="display: none;">
+            </div>
+            <div class="include-details">
+                <mat-form-field>
+                    <mat-label>Name</mat-label>
+                    <input matInput placeholder="Enter your text" [(ngModel)]="commonPayload.name">
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Phone number</mat-label>
+                    <input matInput placeholder="Enter your text" [(ngModel)]="commonPayload.mobile">
+                </mat-form-field>
+            </div>
+        </div>
+        <div>
+            <button class="post" mat-raised-button color="primary" (click)="postAdd()">Post now</button>
+        </div>
+    </div>
+</div>

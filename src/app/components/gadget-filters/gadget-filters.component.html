@@ -1,0 +1,95 @@
+<div class="grid">
+    <!-- Price Range Filter -->
+    <div>
+        <div class="example-label-container">
+            <label id="example-name-label" class="example-name-label">Price</label>
+            <label class="example-value-label">{{price}}</label>
+        </div>
+        <div style="display: flex;">
+            <mat-slider class="example-margin" disabled="false" max="100000" min="0" step="1000" discrete=false
+                showTickMarks="false" (input)="price = $event.value" invert="false">
+                <input matSliderThumb [(ngModel)]="price">
+            </mat-slider>
+            <button class="post" mat-raised-button color="primary" (click)="priceChange()">Apply</button>
+        </div>
+    </div>
+    <br />
+    <!-- Location Filter -->
+    <mat-form-field appearance="fill">
+        <mat-label>State</mat-label>
+        <mat-select [(ngModel)]="selectedDistrict" (selectionChange)="onDistrictChange($event)">
+            <mat-option [value]="null">None</mat-option>
+            <mat-option *ngFor="let district of districts" [value]="district">{{ district.name }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" *ngIf="selectedDistrict">
+        <mat-label>City</mat-label>
+        <mat-select [(ngModel)]="selectedCity" (selectionChange)="onCityChange($event)">
+            <mat-option [value]="null">None</mat-option>
+            <mat-option *ngFor="let city of cities" [value]="city">{{ city.name}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" *ngIf="selectedCity">
+        <mat-label>Near By</mat-label>
+        <mat-select [(ngModel)]="selectedNearBy" (selectionChange)="onNearByChange($event)">
+            <mat-option [value]="null">None</mat-option>
+            <mat-option *ngFor="let nearBy of nearByPlaces" [value]="nearBy">{{ nearBy.name}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <!-- Brand Filter -->
+    <mat-form-field appearance="fill">
+        <mat-label>Brand</mat-label>
+        <mat-select [(ngModel)]="selectedBrand" multiple (selectionChange)="onBrandSelect($event)">
+            <mat-option *ngFor="let brand of brands" [value]="brand">{{ brand.brandName }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>No. Owners</mat-label>
+        <mat-select multiple (selectionChange)="onOwnerSelect($event)">
+            <mat-option *ngFor="let owner of numberOfOwners" [value]="owner">{{ owner }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <div>
+        <div class="example-label-container">
+            <label id="example-name-label" class="example-name-label">Km driven</label>
+            <label class="example-value-label">{{kms}}</label>
+        </div>
+        <div style="display: flex;">
+            <mat-slider class="example-margin" disabled="false" max="100000" min="0" step="1000" discrete=false
+                showTickMarks="false" (input)="kms = $event.value" invert="false">
+                <input matSliderThumb [(ngModel)]="kms">
+            </mat-slider>
+            <button class="post" mat-raised-button color="primary" (click)="kmsChange()">Apply</button>
+        </div>
+    </div>
+    <mat-form-field appearance="fill">
+        <mat-label>Fuel type</mat-label>
+        <mat-select multiple (selectionChange)="onFuelSelect($event)">
+            <mat-option *ngFor="let fuel of fuelTypes" [value]="fuel.id">{{ fuel.label }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Transmission type</mat-label>
+        <mat-select multiple (selectionChange)="onTransmissionSelect($event)">
+            <mat-option *ngFor="let transmission of transmissionTypes" [value]="transmission.id">{{
+                transmission.label}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <div style="display: flex;">
+        <mat-form-field style="width: 145px;">
+            <mat-label>From</mat-label>
+            <input matInput placeholder="Enter from year" [(ngModel)]="fromYear">
+        </mat-form-field>
+        <mat-form-field style="width: 145px;">
+            <mat-label>To</mat-label>
+            <input matInput placeholder="Enter to year" [(ngModel)]="toYear">
+        </mat-form-field>
+        <br />
+        <button class="post" mat-raised-button color="primary" (click)="yearChange()">Apply</button>
+    </div>
+</div>

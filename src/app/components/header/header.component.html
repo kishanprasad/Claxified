@@ -1,0 +1,88 @@
+<header>
+    <nav class="nav-bar">
+      <div class="container">
+        <div class="icon-text">
+          <a href="#" title="Gumtree" class="icon-text1">
+            <div class="logo-text"><span>Claxified</span></div>
+          </a>
+        </div>
+        <div class="css-1pr0bng em7g81m0">
+          <div class="search-bar-container">
+            <form action="/search">
+              <div class="search-bar">
+                <div class="inputs-wrapper">
+                  <div class="keyword-search-container">
+                    <div class="keyword-search-field">
+                      <div class="form-element form-element--input type-ahead">
+                        <div class="form-element form-element--input"><input aria-label="Type search query"
+                            placeholder="eg. BMW 3 series, 3 seater sofa, lawnmower, dining table" maxlength="50"
+                            autocomplete="off" class="input input-text" type="text" id="q" name="q" value=""></div>
+                      </div>
+                    </div>
+                  </div><label class="search-location-label" for="header-search-location">
+                    <div class="dividing-line"></div>
+                  </label>
+                  <div class="location-container">
+                    <div class="form-element form-element--input type-ahead">
+                      <div class="form-element form-element--input"><input aria-label="Location" maxlength="50"
+                          placeholder="Add your postcode or location" autocomplete="off" class="input input-text"
+                          type="text" id="header-search-location" name="search_location" value=""></div>
+                    </div>
+                    <button class="button button--primary search-button " rel="noopener noreferrer" type="submit">
+                      <span class="glyphicon glyphicon-zoom-in css-0 eom5h670" aria-hidden="true"></span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+  
+          </div>
+          <div class="pull-right header-actions ">
+            <ul class="nav navbar-nav navbar-right">
+              <li class="sell"><a routerLink = "/post"><span class="glyphicon glyphicon-plus"></span> Sell</a></li>
+              <li class="login"><a href="#"><span class="glyphicon glyphicon-user"></span> Login/Register</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <nav class="navbar navbar-inverse">
+      <div class="second-nav">
+        <ul class="nav navbar-nav">
+          <li class="dropdown"><a>Car & Vehicles</a>
+            <div class="udayopen">
+              <ul class="list-unstyled list">
+                <li><a [routerLink]="'/view-posts'" [queryParams]="{ type: 'Vehicle', sub: vehicleTypes.Car }">Cars</a></li>
+                <li><a [routerLink]="'/view-posts'" [queryParams]="{ type: 'Vehicle', sub: vehicleTypes.Bike }">Bikes</a></li>
+                <li><a [routerLink]="'/view-posts'" [queryParams]="{ type: 'Vehicle', sub: vehicleTypes.Scooty }">Scooty</a></li>
+                <li><a [routerLink]="'/view-posts'" [queryParams]="{ type: 'Vehicle', sub: vehicleTypes.Bicycle }">Bicycle</a></li>
+                <li><a [routerLink]="'/view-posts'" [queryParams]="{ type: 'Vehicle', sub: vehicleTypes.SpareParts }">Spare parts</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="dropdown"><a>Gadgets</a>
+            <div class="udayopen">
+              <ul class="list-unstyled list">
+                <li><a [routerLink]="'/view-posts'" [queryParams]="{ type: 'Gadget', sub: gadgetsTypes.Mobiles }">Mobiles</a></li>
+                <li><a [routerLink]="'/view-posts'" [queryParams]="{ type: 'Gadget', sub: gadgetsTypes.Tablets }">Tablets</a></li>
+                <li><a [routerLink]="'/view-posts'" [queryParams]="{ type: 'Gadget', sub: gadgetsTypes.Accessories }">Accessories</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="dropdown"><a>Electronics</a>
+            <div class="udayopen">
+              <ul class="list-unstyled list">
+                <li><a>Computers</a></li>
+                <li><a>Tvs</a></li>
+              </ul>
+            </div>
+          </li>
+          <li><a href="#">Jobs</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="#">Community</a></li>
+          <li><a href="#">Pets</a></li>
+        </ul>
+      </div>
+    </nav>
+  
+  </header>
